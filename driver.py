@@ -52,7 +52,11 @@ btn_events = {ecodes.EV_KEY: btn_codes}
 dev = usb.core.find(idVendor=config["vendor_id"], idProduct=config["product_id"])
 # Select end point for reading second interface [2] for actual data
 # I don't know what [0] and [1] are used for
-ep = dev[0].interfaces()[2].endpoints()[0]
+try:
+    ep = dev[0].interfaces()[2].endpoints()[0]
+except:
+    print("please connect your graphic tablet")
+    exit()
 # Reset the device (don't know why, but till it works don't touch it)
 dev.reset()
 
